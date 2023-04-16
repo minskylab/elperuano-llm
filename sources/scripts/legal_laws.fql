@@ -1,0 +1,11 @@
+LET doc = DOCUMENT('https://diariooficial.elperuano.pe/normas', {driver: 'cdp'})
+
+WAIT(1000)
+
+FOR el IN ELEMENTS(doc, 'article.edicionesoficiales_articulos')
+    LET button = ELEMENT(el, 'div.ediciones_botones')
+    LET ul_button = ELEMENT(button, 'ul')
+    LET li_button = ELEMENT(ul_button, 'li:nth-child(1) > input')
+    // LET a_button = ELEMENT(li_button, 'a')
+
+    RETURN li_button.attributes['data-url']

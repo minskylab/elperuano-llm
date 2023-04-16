@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "elperuano-llm"
+version = "0.1.0"
+description = ""
+authors = ["Bregy Malpartida <bregy@minsky.cc>"]
+readme = "README.md"
+packages = [{include = "elperuano_llm"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+llama-index = "^0.5.15"
+httpx = "^0.24.0"
+asyncio = "^3.4.3"
+tqdm = "^4.65.0"
+pypdf2 = "^3.0.1"
+python-dotenv = "^1.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.2.0"
+ruff = "^0.0.261"
+autopep8 = "^2.0.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
