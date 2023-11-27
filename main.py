@@ -6,12 +6,13 @@ from llama_index.indices.base import BaseGPTIndex
 from pathlib import Path
 
 DEFAULT_DATA_FOLDER = ".elperuano"
+DEFAULT_MONTFERRET_WORKER_URL = "http://montferret-worker-production.up.railway.app"
 DEFAULT_LAWS_FOLDER = f"{DEFAULT_DATA_FOLDER}/laws"
 DEFAULT_SAVED_VERSION_FILEPATH = f"{DEFAULT_DATA_FOLDER}/saved_version.json"
 
 
 async def download_laws():
-    urls = await get_legal_laws_urls("http://192.168.8.100:8080")
+    urls = await get_legal_laws_urls(DEFAULT_MONTFERRET_WORKER_URL)
     await download_laws_to_disk(urls, folder_path=DEFAULT_LAWS_FOLDER)
 
 
@@ -31,10 +32,13 @@ async def load_laws_as_index(saved_version_filepath: str) -> BaseGPTIndex:
 async def main():
     load_dotenv()
 
-    laws_index = await load_laws_as_index(DEFAULT_SAVED_VERSION_FILEPATH)
-    res = laws_index.query(
-        "Cuantas leyes existen relacionadas con los recursos humanos?")
+    await download_laws()
+    # laws_index = await load_laws_as_index(DEFAULT_SAVED_VERSION_FILEPATH)
+    # res = laws_index.query(
+    #     "Resume los cambios más importantes en el sistema de justicia penal",
+    #     mode="summarize",
+    # )
 
-    print(res)
+    # print(res)
 
 run(main())

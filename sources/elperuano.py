@@ -6,14 +6,19 @@ from re import search
 
 
 async def get_legal_laws_urls(host: str, params: dict | None = None) -> dict:
+    
     with open("sources/scripts/legal_laws.fql", "r") as f:
         query = f.read()
+        print(f"{query}")
 
         res = await montferret_query(
             query=query,
             host=host,
             params=params,
         )
+
+
+        print(res)
 
         return res
 
