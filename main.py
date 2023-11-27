@@ -6,7 +6,7 @@ from llama_index.indices.base import BaseGPTIndex
 from pathlib import Path
 
 DEFAULT_DATA_FOLDER = ".elperuano"
-DEFAULT_MONTFERRET_WORKER_URL = "http://montferret-worker-production.up.railway.app"
+DEFAULT_MONTFERRET_WORKER_URL = "https://montferret-worker-production.up.railway.app"
 DEFAULT_LAWS_FOLDER = f"{DEFAULT_DATA_FOLDER}/laws"
 DEFAULT_SAVED_VERSION_FILEPATH = f"{DEFAULT_DATA_FOLDER}/saved_version.json"
 
