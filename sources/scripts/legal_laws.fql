@@ -28,8 +28,6 @@ CLICK(searchButton)
 
 WAIT(50000)
 
-RETURN {resultado : ELEMENT(doc, '#resultado')}
-
 FOR el IN ELEMENTS(doc, 'article.edicionesoficiales_articulos')
     LET button = ELEMENT(el, 'div.ediciones_botones')
     LET ul_button = ELEMENT(button, 'ul')
