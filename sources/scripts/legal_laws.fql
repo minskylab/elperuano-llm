@@ -2,6 +2,19 @@ LET doc = DOCUMENT('https://diariooficial.elperuano.pe/normas', {driver: 'cdp'})
 
 WAIT(1000)
 
+LET desdeDateInput = ELEMENT(doc, '#cddesde')
+CLICK(desdeDateInput)
+WAIT(RAND(100))
+LET allDays = ELEMENTS(doc, 'a.ui-state-default')
+FOR dayLink IN allDays
+    FILTER INNER_TEXT(dayLink) == TO_STRING(@day_from)
+        CLICK(dayLink)
+//clic en buscar
+LET searchButton = ELEMENT(doc, '#btnBuscar')
+CLICK(searchButton)
+
+WAIT(30000)
+
 FOR el IN ELEMENTS(doc, 'article.edicionesoficiales_articulos')
     LET button = ELEMENT(el, 'div.ediciones_botones')
     LET ul_button = ELEMENT(button, 'ul')
