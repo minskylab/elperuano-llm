@@ -1,9 +1,10 @@
 
-from httpx import AsyncClient
+from httpx import AsyncClient, Timeout
 
 
 async def montferret_query(host: str, query: str, params: dict | None = None) -> dict:
-    async with AsyncClient() as client:
+    timeout = Timeout(6.0, read=None)
+    async with AsyncClient(timeout = timeout) as client:
         r = await client.post(host, json={
             "text": query,
             "params": params,
