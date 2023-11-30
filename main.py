@@ -47,7 +47,7 @@ async def load_laws_as_index(saved_version_filepath: str) -> BaseGPTIndex:
 async def main():
     load_dotenv()
 
-    await download_laws(1,11,2023,20,11,2023)
+    await download_laws(1,11,2023,30,11,2023)
     # laws_index = await load_laws_as_index(DEFAULT_SAVED_VERSION_FILEPATH)
     # res = laws_index.query(
     #     "Resume los cambios más importantes en el sistema de justicia penal",

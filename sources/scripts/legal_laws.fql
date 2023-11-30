@@ -2,18 +2,33 @@ LET doc = DOCUMENT('https://diariooficial.elperuano.pe/normas', {driver: 'cdp'})
 
 WAIT(1000)
 
+//cambiamos la fecha desde
 LET desdeDateInput = ELEMENT(doc, '#cddesde')
 CLICK(desdeDateInput)
-WAIT(RAND(100))
-LET allDays = ELEMENTS(doc, 'a.ui-state-default')
-FOR dayLink IN allDays
-    FILTER INNER_TEXT(dayLink) == TO_STRING(@day_from)
-        CLICK(dayLink)
+SELECT(doc, 'select[class="ui-datepicker-month"]', [TO_STRING(@month_from)])
+SELECT(doc, 'select[class="ui-datepicker-year"]', [TO_STRING(@year_from)])
+LET desdeDays = ELEMENTS(doc, 'a.ui-state-default')
+FOR dayDesde IN desdeDays
+    FILTER INNER_TEXT(dayDesde) == TO_STRING(@day_from)
+        CLICK(dayDesde)
+
+//cambiamos la fecha hasta
+LET hastaDateInput = ELEMENT(doc, '#cdhasta')
+CLICK(hastaDateInput)
+SELECT(doc, 'select[class="ui-datepicker-month"]', [TO_STRING(@month_to)])
+SELECT(doc, 'select[class="ui-datepicker-year"]', [TO_STRING(@year_to)])
+LET hastaDays = ELEMENTS(doc, 'a.ui-state-default')
+FOR dayHasta IN hastaDays
+    FILTER INNER_TEXT(dayHasta) == TO_STRING(@day_to)
+        CLICK(dayHasta)
+
 //clic en buscar
 LET searchButton = ELEMENT(doc, '#btnBuscar')
 CLICK(searchButton)
 
-WAIT(30000)
+WAIT(50000)
+
+RETURN {resultado : ELEMENT(doc, '#resultado')}
 
 FOR el IN ELEMENTS(doc, 'article.edicionesoficiales_articulos')
     LET button = ELEMENT(el, 'div.ediciones_botones')
